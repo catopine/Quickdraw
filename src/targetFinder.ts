@@ -17,6 +17,8 @@
 
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 
+import { j, setJ } from './app.js'
+
 export class Region {
   constructor (
     public readonly regionNumber: number,
@@ -81,6 +83,7 @@ export function initTargetFinder (regionArray: Region[]): (prevTargAccepted: boo
       if (targetsFound.length !== 0) {
         return targetsFound.pop()
       } else {
+        setJ(1)
         while (regionArray[regionArrayPosition] !== undefined) {
           if (regionArray[regionArrayPosition].isHittable && (findTrigger() !== undefined)) {
             return new TargetInfo(regionArray[regionArrayPosition], findTrigger()!)

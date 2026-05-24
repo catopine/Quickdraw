@@ -17,6 +17,15 @@
 
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 
+// Making shotguns work with QD would probably be easier if I understood TS
+// Also why did Ziz never use semicolons? I know it doesn't matter, but it itches my brain
+let j = 1
+function setJ(value: number) {
+  j = value
+}
+
+export { j, setJ }
+
 import * as ui from './ui.js'
 import { NsApi } from './api.js'
 import { SpyglassSheet } from './sheet.js'
@@ -31,8 +40,11 @@ setup()
 
 // The confirmation modal instance must be passed into this function.
 // Otherwise, there is no way of closing it.
-function initModalUpdater (confirmationModal: Modal, updateLength: number, targetFinder: (prevTargAccepted: boolean) => TargetInfo | undefined): (prevTargAccepted: boolean) => void {
+function initModalUpdater (confirmationModal: Modal, updateLength: number, numTeams: number, targetFinder: (prevTargAccepted: boolean) => TargetInfo | undefined): (prevTargAccepted: boolean) => void {
   let i = 1
+  // j needs to be exported to keep having not enough targets per trigger from causing problems
+  // This is what I used before realizing that fact. Keeping in case I ruin everything
+  // let j = 1
 
   let prevRegionUrl: string
   let prevRegionUpdateTime: string
@@ -44,10 +56,24 @@ function initModalUpdater (confirmationModal: Modal, updateLength: number, targe
   let triggerListText = ''
 
   return function updateModal (prevTargAccepted: boolean) {
-    if (prevTargAccepted) {
+    if (prevTargAccepted && numTeams === 1) {
       raidFileText += `${i}) ${prevRegionUrl} (${prevRegionUpdateTime})\n\ta) ${prevTriggerUrl} (${prevTriggerLength}s)\n\n`
       triggerListText += `${prevTriggerName}\n`
       i++
+    } else if (prevTargAccepted) {
+      if (j === 1) {
+        raidFileText += `${i})`
+        triggerListText += `${prevTriggerName}\n`
+      }
+      raidFileText += `\t${j}) ${prevRegionUrl} (${prevRegionUpdateTime})\n`
+      if(j !== numTeams) {
+        j++
+        prevTargAccepted = false
+      } else {
+        j = 1
+        raidFileText += `\t\ta) ${prevTriggerUrl} (${prevTriggerLength}s)\n\n`
+        i++
+      }
     }
 
     const targetSearchResults = targetFinder(prevTargAccepted)
@@ -100,6 +126,9 @@ async function main (ev: Event): Promise<void> {
   const userNationInput = document.getElementById('nationName')! as HTMLInputElement
   const userNation = userNationInput.value
   nsApi.setUA(userNation)
+  
+  const numTeamsInput = document.getElementById('teamNum')! as HTMLInputElement
+  const numTeams = +numTeamsInput.value
 
   const updateSelector = document.getElementById('updateTime')! as HTMLSelectElement
   const updatePeriod = updateSelector.value
@@ -167,13 +196,13 @@ async function main (ev: Event): Promise<void> {
     const regionUpdateTimeString = spyglassSheet.readCell(`${updateTimeColumn}${i}`) as string
 
     // Strip any Spyglass indicators from the region name
-    if (regionNameCell.slice(-1) === '~' || regionNameCell.slice(-1) === '*') {
+    if (regionNameCell.slice(-1) === '~' || regionNameCell.slice(-1) === '*' || regionNameCell.slice(-1) === '^') {
       regionName = regionNameCell.slice(0, -1)
     } else {
       regionName = regionNameCell
     }
     // Check if region is passworded
-    if (regionNameCell.slice(-1) !== '~') {
+    if (regionNameCell.slice(-1) !== '~' || regionNameCell.slice(-1) !== '^') {
       regionArray.push(new Region(i - 1, regionName, regionUpdateTime, regionUpdateTimeString, false))
       continue
     }
@@ -234,7 +263,7 @@ async function main (ev: Event): Promise<void> {
     backdrop: 'static',
     keyboard: false
   })
-  const updateModal = initModalUpdater(targetConfirmationModal, regionArray.length, targetFinder)
+  const updateModal = initModalUpdater(targetConfirmationModal, regionArray.length, numTeams, targetFinder)
   const acceptTargetButton = document.getElementById('acceptTarget')! as HTMLButtonElement
   const declineTargetButton = document.getElementById('declineTarget')! as HTMLButtonElement
   acceptTargetButton.addEventListener('click', updateModal.bind(null, true))

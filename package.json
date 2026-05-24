@@ -1,6 +1,6 @@
 {
   "name": "quickdraw",
-  "version": "1.2.2",
+  "version": "1.3.0",
   "description": "A NationStates utility to help quickly organize tag raids",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Aptenodyte/Quickdraw.git"
+    "url": "git+https://github.com/catopine/Quickdraw.git"
   },
-  "author": "Zizou",
+  "author": "Tyrannical Porcupines United",
   "license": "AGPL-3.0-or-later",
   "bugs": {
-    "url": "https://github.com/Aptenodyte/Quickdraw/issues"
+    "url": "https://github.com/catopine/Quickdraw/issues"
   },
-  "homepage": "https://github.com/Aptenodyte/Quickdraw#readme",
+  "homepage": "https://github.com/catopine/Quickdraw#readme",
   "devDependencies": {
     "@types/bootstrap": "^5.2.6",
     "@types/file-saver": "^2.0.5",

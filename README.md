@@ -21,4 +21,4 @@ Unfortunately, Quickdraw makes use of ES6 modules, which cannot be loaded via `f
 
 ## Issues
 
-In case of a bug or a feature request, either create an [issue](https://github.com/Aptenodyte/Quickdraw/issues), or contact me at Zizou#4903 on Discord.
+In case of a bug or a feature request, either create an [issue](https://github.com/catopine/Quickdraw/issues), or contact me at porcupiene on Discord.
