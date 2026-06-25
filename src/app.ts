@@ -23,6 +23,8 @@ let j = 1
 function setJ(value: number) {
   j = value
 }
+// This is to make sure the UA stuff works with inheritance or smth, idk
+let userAgent = ''
 
 export { j, setJ }
 
@@ -105,10 +107,10 @@ function initModalUpdater (confirmationModal: Modal, updateLength: number, numTe
     }
 
     const { region, trigger } = targetSearchResults
-    const regionUrl = `https://www.nationstates.net/region=${ui.sanitize(region.name)}`
+    const regionUrl = `https://www.nationstates.net/region=${ui.sanitize(region.name)}?generated_by=quickdraw_bot_v1_3__by_tyrannical_porcupines_united__usedBy_${userAgent}`
     prevRegionUrl = regionUrl
     prevRegionUpdateTime = region.updateTimeString
-    const triggerUrl = `https://www.nationstates.net/template-overall=none/region=${ui.sanitize(trigger.name)}`
+    const triggerUrl = `https://www.nationstates.net/template-overall=none/region=${ui.sanitize(trigger.name)}?generated_by=quickdraw_bot_v1_3__by_tyrannical_porcupines_united__usedBy_${userAgent}`
     prevTriggerName = trigger.name
     prevTriggerUrl = triggerUrl
     const triggerLength = region.updateTime - trigger.updateTime
@@ -125,6 +127,8 @@ async function main (ev: Event): Promise<void> {
 
   const userNationInput = document.getElementById('nationName')! as HTMLInputElement
   const userNation = userNationInput.value
+  userAgent = userNation
+  if (userAgent === '') { throw new Error('Set a nation before using the tool') }
   nsApi.setUA(userNation)
   
   const numTeamsInput = document.getElementById('teamNum')! as HTMLInputElement
