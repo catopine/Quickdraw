@@ -206,7 +206,7 @@ async function main (ev: Event): Promise<void> {
       regionName = regionNameCell
     }
     // Check if region is passworded
-    if (regionNameCell.slice(-1) !== '~' || regionNameCell.slice(-1) !== '^') {
+    if (regionNameCell.slice(-1) !== '~' && regionNameCell.slice(-1) !== '^') {
       regionArray.push(new Region(i - 1, regionName, regionUpdateTime, regionUpdateTimeString, false))
       continue
     }
