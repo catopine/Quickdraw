@@ -172,13 +172,13 @@ async function main (ev: Event): Promise<void> {
     const regionUpdateTimeString = spyglassSheet.readCell(`${updateTimeColumn}${i}`) as string
 
     // Strip any Spyglass indicators from the region name
-    if (regionNameCell.slice(-1) === '~' || regionNameCell.slice(-1) === '*') {
+    if (regionNameCell.slice(-1) === '~' || regionNameCell.slice(-1) === '*' || regionNameCell.slice(-1) === '^') {
       regionName = regionNameCell.slice(0, -1)
     } else {
       regionName = regionNameCell
     }
     // Check if region is passworded
-    if (regionNameCell.slice(-1) !== '~') {
+    if (regionNameCell.slice(-1) !== '~' && regionNameCell.slice(-1) !== '^') {
       regionArray.push(new Region(i - 1, regionName, regionUpdateTime, regionUpdateTimeString, false))
       continue
     }
