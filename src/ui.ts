@@ -29,7 +29,9 @@ export function fillDefaultEmbassies (): void {
     'Leningrad Airfield',
     'The Brotherhood of Malice',
     'Plum Island',
-    'Suspicious'
+    'Suspicious',
+    'Phantom',
+    'Fuchswalde'
   ]
   const ignoreEmbassiesField = document.getElementById('ignoreEmbassies')! as HTMLInputElement
   ignoreEmbassiesField.value = DEFAULT_EMBASSY_FILTERS.join(', ')

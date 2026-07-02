@@ -4,14 +4,14 @@ A script that will go through a [Spyglass](https://github.com/khronion/Spyglass)
 
 ## Usage
 
-The tool is located [here](https://aptenodyte.github.io/Quickdraw/). The site is pretty self-explanatory, and all times are to be given in seconds. Quickdraw is now completely browser based, and as such, no longer offers a CLI app.  
+The tool is located [here](https://catopine.github.io/Quickdraw/). The site is pretty self-explanatory, and all times are to be given in seconds. Quickdraw is now completely browser based, and as such, no longer offers a CLI app.  
 
 After selecting your targets, you will be given the option to download two files. One is called `raidFile.txt`, and contains a list of targets and triggers organized in the following format:
 ```
 1) target url (target update time)
     a) trigger blank template url (trigger length)
 ```
-There is also an option to download a file called `trigger_list.txt`, which contains a list of triggers for use with [KATT](https://github.com/khronion/KATT).
+There is also an option to download a file called `trigger_list.txt`, which contains a list of triggers for use with [FattKATT](https://github.com/Vleerian/FattKATT).
 
 ## Running a local copy
 
@@ -21,4 +21,4 @@ Unfortunately, Quickdraw makes use of ES6 modules, which cannot be loaded via `f
 
 ## Issues
 
-In case of a bug or a feature request, either create an [issue](https://github.com/Aptenodyte/Quickdraw/issues), or contact me at Zizou#4903 on Discord.
+In case of a bug or a feature request, either create an [issue](https://github.com/Catopine/Quickdraw/issues), or contact me at Porcupiene on Discord.

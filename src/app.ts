@@ -17,6 +17,10 @@
 
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 
+// This is cause smth with inheritance breaks otherwise. I think.
+// I don't understand TypeScript.
+let userAgent = ''
+
 import * as ui from './ui.js'
 import { NsApi } from './api.js'
 import { SpyglassSheet } from './sheet.js'
@@ -79,10 +83,10 @@ function initModalUpdater (confirmationModal: Modal, updateLength: number, targe
     }
 
     const { region, trigger } = targetSearchResults
-    const regionUrl = `https://www.nationstates.net/region=${ui.sanitize(region.name)}`
+    const regionUrl = `https://www.nationstates.net/region=${ui.sanitize(region.name)}?generated_by=quickdraw_bot_v1_3__by_tyrannical_porcupines_united__usedBy_${userAgent}`
     prevRegionUrl = regionUrl
     prevRegionUpdateTime = region.updateTimeString
-    const triggerUrl = `https://www.nationstates.net/template-overall=none/region=${ui.sanitize(trigger.name)}`
+    const triggerUrl = `https://www.nationstates.net/template-overall=none/region=${ui.sanitize(trigger.name)}?generated_by=quickdraw_bot_v1_3__by_tyrannical_porcupines_united__usedBy_${userAgent}`
     prevTriggerName = trigger.name
     prevTriggerUrl = triggerUrl
     const triggerLength = region.updateTime - trigger.updateTime
@@ -99,6 +103,7 @@ async function main (ev: Event): Promise<void> {
 
   const userNationInput = document.getElementById('nationName')! as HTMLInputElement
   const userNation = userNationInput.value
+  userAgent = userNation
   nsApi.setUA(userNation)
 
   const updateSelector = document.getElementById('updateTime')! as HTMLSelectElement
