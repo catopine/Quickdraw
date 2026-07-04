@@ -29,7 +29,10 @@ export function fillDefaultEmbassies (): void {
     'Leningrad Airfield',
     'The Brotherhood of Malice',
     'Plum Island',
-    'Suspicious'
+    'Suspicious',
+    'Phantom',
+    'Fuchswalde',
+    'The Crimson Empire'
   ]
   const ignoreEmbassiesField = document.getElementById('ignoreEmbassies')! as HTMLInputElement
   ignoreEmbassiesField.value = DEFAULT_EMBASSY_FILTERS.join(', ')
@@ -43,7 +46,9 @@ export function fillDefaultPhrases (): void {
     'https://discord.com/invite/brotherhoodofmalice',
     'https://ijaka.xyz/discord',
     'https://osiris.valthost.com/',
-    'https://www.forum.the-black-hawks.org/'
+    'https://www.forum.the-black-hawks.org/',
+    'Seized by PRAF in Operation Sputnik',
+    'https://discord.gg/XWvERyc'
   ]
 
   const ignorePhrasesField = document.getElementById('ignorePhrases')! as HTMLInputElement
