@@ -1,6 +1,6 @@
 # Quickdraw
 
-A script that will go through a [Spyglass](https://github.com/khronion/Spyglass) sheet and automatically generate raid targets and triggers
+A script that will go through a [Spyglass](https://github.com/khronion/Spyglass) sheet and automatically generate raid targets and triggers, originally by Zizou, now maintained and updated by Porcupine
 
 ## Usage
 
